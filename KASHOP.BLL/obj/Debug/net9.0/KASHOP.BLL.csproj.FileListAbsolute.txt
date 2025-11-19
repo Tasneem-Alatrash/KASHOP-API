@@ -1,0 +1,16 @@
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.BLL/bin/Debug/net9.0/KASHOP.BLL.deps.json
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.BLL/bin/Debug/net9.0/KASHOP.BLL.dll
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.BLL/bin/Debug/net9.0/KASHOP.BLL.pdb
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.BLL/bin/Debug/net9.0/KASHOP.DAL.dll
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.BLL/bin/Debug/net9.0/KASHOP.DAL.pdb
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.BLL/obj/Debug/net9.0/KASHOP.BLL.csproj.AssemblyReference.cache
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.BLL/obj/Debug/net9.0/KASHOP.BLL.GeneratedMSBuildEditorConfig.editorconfig
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.BLL/obj/Debug/net9.0/KASHOP.BLL.AssemblyInfoInputs.cache
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.BLL/obj/Debug/net9.0/KASHOP.BLL.AssemblyInfo.cs
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.BLL/obj/Debug/net9.0/KASHOP.BLL.csproj.CoreCompileInputs.cache
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.BLL/obj/Debug/net9.0/KASHOP.BLL.sourcelink.json
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.BLL/obj/Debug/net9.0/KASHOP.BLL.csproj.Up2Date
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.BLL/obj/Debug/net9.0/KASHOP.BLL.dll
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.BLL/obj/Debug/net9.0/refint/KASHOP.BLL.dll
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.BLL/obj/Debug/net9.0/KASHOP.BLL.pdb
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.BLL/obj/Debug/net9.0/ref/KASHOP.BLL.dll

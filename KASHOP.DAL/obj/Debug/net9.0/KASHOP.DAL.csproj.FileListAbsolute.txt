@@ -1,0 +1,15 @@
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.DAL/bin/Debug/net9.0/KASHOP.DAL.deps.json
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.DAL/bin/Debug/net9.0/KASHOP.DAL.runtimeconfig.json
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.DAL/bin/Debug/net9.0/KASHOP.DAL.dll
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.DAL/bin/Debug/net9.0/KASHOP.DAL.pdb
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.DAL/obj/Debug/net9.0/KASHOP.DAL.csproj.AssemblyReference.cache
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.DAL/obj/Debug/net9.0/KASHOP.DAL.GeneratedMSBuildEditorConfig.editorconfig
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.DAL/obj/Debug/net9.0/KASHOP.DAL.AssemblyInfoInputs.cache
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.DAL/obj/Debug/net9.0/KASHOP.DAL.AssemblyInfo.cs
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.DAL/obj/Debug/net9.0/KASHOP.DAL.csproj.CoreCompileInputs.cache
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.DAL/obj/Debug/net9.0/KASHOP.DAL.sourcelink.json
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.DAL/obj/Debug/net9.0/KASHOP.DAL.dll
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.DAL/obj/Debug/net9.0/refint/KASHOP.DAL.dll
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.DAL/obj/Debug/net9.0/KASHOP.DAL.pdb
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.DAL/obj/Debug/net9.0/KASHOP.DAL.genruntimeconfig.cache
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.DAL/obj/Debug/net9.0/ref/KASHOP.DAL.dll
