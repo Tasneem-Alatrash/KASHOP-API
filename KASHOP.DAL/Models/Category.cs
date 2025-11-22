@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace KASHOP.DAL.Models
 {
-    public class Category
+    public class Category : BaseModel
     {
-        public int Id{get; set;}
-        public string Name{get; set;}
+        
+        public List<CategoryTrinslation> Trinslations{get; set;}
     }
 }

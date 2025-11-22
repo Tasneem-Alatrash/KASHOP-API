@@ -7,8 +7,10 @@ using KASHOP.DAL.Models;
 namespace KASHOP.DAL
 {
     public class ApplicationDbContext : DbContext
-    {
+    {   
+      
       public DbSet<Category> Categories { get; set; }
+      public DbSet<CategoryTrinslation> CategoryTrinslations { get; set; }
       public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
     {

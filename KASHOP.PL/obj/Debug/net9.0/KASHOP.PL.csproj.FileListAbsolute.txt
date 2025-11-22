@@ -156,3 +156,14 @@
 /Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.PL/obj/Debug/net9.0/KASHOP.PL.pdb
 /Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.PL/obj/Debug/net9.0/KASHOP.PL.genruntimeconfig.cache
 /Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.PL/obj/Debug/net9.0/ref/KASHOP.PL.dll
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.PL/bin/Debug/net9.0/ar/KASHOP.PL.resources.dll
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.PL/obj/Debug/net9.0/KASHOP.PL.Resources.SharedResources.resources
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.PL/obj/Debug/net9.0/KASHOP.PL.Resources.SharedResources.ar.resources
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.PL/obj/Debug/net9.0/KASHOP.PL.csproj.GenerateResource.cache
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.PL/obj/Debug/net9.0/ar/KASHOP.PL.resources.cs
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.PL/obj/Debug/net9.0/ar/KASHOP.PL.resources.dll
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.PL/bin/Debug/net9.0/Mapster.dll
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.PL/bin/Debug/net9.0/Mapster.Core.dll
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.PL/bin/Debug/net9.0/Swashbuckle.AspNetCore.Swagger.dll
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.PL/bin/Debug/net9.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.PL/bin/Debug/net9.0/Swashbuckle.AspNetCore.SwaggerUI.dll
