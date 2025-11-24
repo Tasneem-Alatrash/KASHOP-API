@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
 using Microsoft.Extensions.Options;
+using KASHOP.DAL.Repository;
+using KASHOP.BLL.Service;
 
 namespace KASHOP.PL;
 
@@ -56,8 +58,12 @@ public class Program
             });
         });
         //
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen();
+
+        builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+        builder.Services.AddScoped<ICategoryService , CategoryService>();
+
         var app = builder.Build();
         app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
 
@@ -66,7 +72,7 @@ builder.Services.AddSwaggerGen();
         {
             app.MapOpenApi();
             app.UseSwagger();
-    app.UseSwaggerUI();
+            app.UseSwaggerUI();
         }
 
         app.UseHttpsRedirection();

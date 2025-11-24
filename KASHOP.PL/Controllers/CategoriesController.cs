@@ -8,6 +8,8 @@ using Microsoft.Extensions.Localization;
 using KASHOP.DAL.Models;
 using KASHOP.DAL.DTO.Request;
 using Microsoft.EntityFrameworkCore;
+using KASHOP.DAL.Repository;
+using KASHOP.BLL.Service;
 
 
 namespace KASHOP.PL.Controllers
@@ -16,26 +18,24 @@ namespace KASHOP.PL.Controllers
     [Route("api/[controller]")]
     public class CategoriesController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+
         private readonly IStringLocalizer<SharedResources> _localizer;
-        public CategoriesController(ApplicationDbContext context , IStringLocalizer<SharedResources> localizer)
+        private readonly ICategoryService _categoryService;
+        public CategoriesController(IStringLocalizer<SharedResources> localizer , ICategoryService categoryService)
         {
-            _context = context;
+            _categoryService = categoryService;
             _localizer = localizer;
         }
         [HttpGet("")]
         public IActionResult index()
         {
-            var Categories = _context.Categories.Include(c => c.Trinslations).ToList();
-            var response = Categories.Adapt<List<CategoryResponse>>();
+            var response = _categoryService.GetAll();
             return Ok(new { Message = _localizer["Success"].Value,  response });
         }
         [HttpPost("")]
         public IActionResult Create(CategoryRequest request)
         {
-            var category = request.Adapt<Category>();
-            _context.Categories.Add(category);
-            _context.SaveChanges();
+            _categoryService.Create(request);
             return Ok(new { Message = _localizer["Success"].Value });
         }
     }
