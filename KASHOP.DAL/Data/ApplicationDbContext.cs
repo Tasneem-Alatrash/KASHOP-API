@@ -4,16 +4,29 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using KASHOP.DAL.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 namespace KASHOP.DAL
 {
-    public class ApplicationDbContext : DbContext
-    {   
-      
-      public DbSet<Category> Categories { get; set; }
-      public DbSet<CategoryTrinslation> CategoryTrinslations { get; set; }
-      public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-        : base(options)
+  public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+  {
+
+    public DbSet<Category> Categories { get; set; }
+    public DbSet<CategoryTrinslation> CategoryTrinslations { get; set; }
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+      : base(options)
     {
     }
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+      base.OnModelCreating(builder);
+      builder.Entity<ApplicationUser>().ToTable("Users");
+      builder.Entity<IdentityRole>().ToTable("Roles");
+      builder.Entity<IdentityUserRole<string>>().ToTable("UserRoles");
+      builder.Entity<IdentityUserClaim<string>>().ToTable("UserClaims");
+      builder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaims");
+      builder.Entity<IdentityUserLogin<string>>().ToTable("UserLogins");
+      builder.Entity<IdentityUserToken<string>>().ToTable("UserTokens");
     }
+  }
 }
