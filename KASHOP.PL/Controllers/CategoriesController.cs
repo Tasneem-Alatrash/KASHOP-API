@@ -10,12 +10,14 @@ using KASHOP.DAL.DTO.Request;
 using Microsoft.EntityFrameworkCore;
 using KASHOP.DAL.Repository;
 using KASHOP.BLL.Service;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace KASHOP.PL.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class CategoriesController : ControllerBase
     {
 

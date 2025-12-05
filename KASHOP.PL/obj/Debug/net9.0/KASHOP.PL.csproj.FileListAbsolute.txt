@@ -181,5 +181,4 @@
 /Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.PL/bin/Debug/net9.0/Microsoft.Extensions.Logging.Abstractions.dll
 /Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.PL/bin/Debug/net9.0/Microsoft.Extensions.Options.dll
 /Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.PL/bin/Debug/net9.0/Microsoft.Extensions.Primitives.dll
-/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.PL/bin/Debug/net9.0/System.Formats.Asn1.dll
-/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.PL/bin/Debug/net9.0/System.Text.Json.dll
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.PL/bin/Debug/net9.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll

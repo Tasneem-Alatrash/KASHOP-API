@@ -3,15 +3,18 @@ using System;
 using KASHOP.BLL;
 using KASHOP.DAL;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
-
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using KASHOP.DAL.Repository;
 using KASHOP.BLL.Service;
 using KASHOP.DAL.Models;
 using Microsoft.AspNetCore.Identity;
 using KASHOP.DAL.Utils;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 
 
@@ -36,13 +39,61 @@ public class Program
             builder.Configuration.GetConnectionString("DefaultConnection")
         ));
 
-        builder.Services.AddIdentity<ApplicationUser , IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+        builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
         const string defaultCulture = "en";
         var supportedCultures = new[]
         {
             new CultureInfo(defaultCulture),
             new CultureInfo("ar")
         };
+
+        builder.Services.AddAuthentication(opt =>
+        {
+            opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SecurityKey"]))
+        };
+    });
+        builder.Services.AddSwaggerGen(c =>
+    {
+        c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "KASHOP API", Version = "v1" });
+
+        c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+        {
+            Name = "Authorization",
+            Type = Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey,
+            Scheme = "Bearer",
+            BearerFormat = "JWT",
+            In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+            Description = "Enter: Bearer {your token}"
+        });
+
+        c.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
+        {
+        {
+            new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+            {
+                Reference = new Microsoft.OpenApi.Models.OpenApiReference
+                {
+                    Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
+        });
+    });
         builder.Services.Configure<RequestLocalizationOptions>(options =>
         {
             options.DefaultRequestCulture = new RequestCulture(defaultCulture);
@@ -60,10 +111,10 @@ public class Program
         builder.Services.AddSwaggerGen();
 
         builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-        builder.Services.AddScoped<ICategoryService , CategoryService>();
-        builder.Services.AddScoped<ISeedData , RoleSeedData>();
-        builder.Services.AddScoped<ISeedData , UserSeedData>();
-        builder.Services.AddScoped<IAuthenticationService , AuthenticationService>();
+        builder.Services.AddScoped<ICategoryService, CategoryService>();
+        builder.Services.AddScoped<ISeedData, RoleSeedData>();
+        builder.Services.AddScoped<ISeedData, UserSeedData>();
+        builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 
         var app = builder.Build();
         app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
@@ -81,7 +132,7 @@ public class Program
             var seeders = services.GetServices<ISeedData>();
             foreach (var seeder in seeders)
             {
-               await seeder.DataSeed();
+                await seeder.DataSeed();
             }
 
         }
