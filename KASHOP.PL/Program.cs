@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Identity;
 using KASHOP.DAL.Utils;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 
 
@@ -115,6 +116,8 @@ public class Program
         builder.Services.AddScoped<ISeedData, RoleSeedData>();
         builder.Services.AddScoped<ISeedData, UserSeedData>();
         builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+        builder.Services.AddTransient<IEmailSender, EmailSender>();
+
 
         var app = builder.Build();
         app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);

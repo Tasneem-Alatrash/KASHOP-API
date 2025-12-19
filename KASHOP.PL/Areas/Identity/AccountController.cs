@@ -1,3 +1,4 @@
+using System.Diagnostics.Tracing;
 using KASHOP.BLL.Service;
 using KASHOP.DAL.DTO;
 using Microsoft.AspNetCore.Http;
@@ -34,5 +35,15 @@ namespace KASHOP.PL.Areas.Identity
             }
             return Ok(result);
         }
+
+            [HttpGet("ConfirmEmail")]
+        public async Task<IActionResult> ConfirmEmail(string token , string userId)
+        {
+            var result = await _authenticationService.ConfirmEmailAsync(token , userId);
+        
+            return Ok(result);  
+        }
+   
+    
     }
 }

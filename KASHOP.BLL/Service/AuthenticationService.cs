@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace KASHOP.BLL.Service;
 
@@ -15,10 +16,12 @@ public class AuthenticationService : IAuthenticationService
 {
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly IConfiguration _configuration;
-    public AuthenticationService(UserManager<ApplicationUser> userManager , IConfiguration configuration)
+    private readonly IEmailSender _emailSender;
+    public AuthenticationService(UserManager<ApplicationUser> userManager , IConfiguration configuration , IEmailSender emailSender)
     {
         _userManager = userManager;
         _configuration = configuration;
+        _emailSender = emailSender;
     }
     public async Task<LoginResponse> LoginAsync(LoginRequest loginRequest)
     {
@@ -77,8 +80,12 @@ public class AuthenticationService : IAuthenticationService
                     Errors = result.Errors.Select(e => e.Description).ToList()
                 };
             }
-            
+
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            token = Uri.EscapeDataString(token);
+            var EmailURL = $"http://localhost:5296/api/auth/Account/ConfirmEmail?token={token}&userId={user.Id}";
             await _userManager.AddToRoleAsync(user, "User");
+            await _emailSender.SendEmailAsync(user.Email, "Welcome to KASHOP", $"<h1>Thank {user.UserName} for registering at KASHOP!</h1> <a href='{EmailURL}'>Confirm email</a>");    
             return new RegisterResponse
             {
                 Success = true,
@@ -97,6 +104,17 @@ public class AuthenticationService : IAuthenticationService
 
     }
 
+    public async Task<bool> ConfirmEmailAsync(string token , string userId)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+        if(user is null)
+        return false;
+        var result = await _userManager.ConfirmEmailAsync(user , token);
+        if(!result.Succeeded)
+            return false;
+
+        return true;
+    }
     private async Task<string> GenerateAccessToken(ApplicationUser user)
     {
         var userClaims = new List<Claim>()
