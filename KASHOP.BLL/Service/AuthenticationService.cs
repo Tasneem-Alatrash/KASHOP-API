@@ -17,11 +17,14 @@ public class AuthenticationService : IAuthenticationService
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly IConfiguration _configuration;
     private readonly IEmailSender _emailSender;
-    public AuthenticationService(UserManager<ApplicationUser> userManager , IConfiguration configuration , IEmailSender emailSender)
+    private readonly SignInManager<ApplicationUser> _signInManager;
+    public AuthenticationService(UserManager<ApplicationUser> userManager , IConfiguration configuration , IEmailSender emailSender
+    , SignInManager<ApplicationUser> signInManager)
     {
         _userManager = userManager;
         _configuration = configuration;
         _emailSender = emailSender;
+        _signInManager = signInManager;
     }
     public async Task<LoginResponse> LoginAsync(LoginRequest loginRequest)
     {
@@ -37,8 +40,35 @@ public class AuthenticationService : IAuthenticationService
                     
                 };
             }
-            var result = await _userManager.CheckPasswordAsync(user, loginRequest.Password);
-            if (!result)
+            if(await _userManager.IsLockedOutAsync(user))
+            {
+                return new LoginResponse
+                {
+                    Success = false,
+                    Message = "Your account is locked. Please try again later.",
+                    
+                };
+            }
+
+            var result = await _signInManager.CheckPasswordSignInAsync(user ,loginRequest.Password , true);
+            if(result.IsLockedOut)
+            {
+                return new LoginResponse
+                {
+                    Success = false,
+                    Message = "Your account is locked due to multiple failed login attempts. Please try again later.",
+                    
+                };
+            }else if (result.IsNotAllowed)
+            {
+                return new LoginResponse
+                {
+                    Success = false,
+                    Message = "Email not confirmed. Please confirm your email before logging in.",
+                    
+                };
+            }
+            if (!result.Succeeded)
             {
                 return new LoginResponse
                 {
@@ -47,6 +77,7 @@ public class AuthenticationService : IAuthenticationService
                     
                 };
             }
+          
             return new LoginResponse
             {
                 Success = true,
