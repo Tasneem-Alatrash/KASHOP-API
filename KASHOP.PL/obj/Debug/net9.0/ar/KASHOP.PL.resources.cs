@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("KASHOP.PL")]
 [assembly: System.Reflection.AssemblyCopyrightAttribute(" ")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dcfb3d997782b675b72f0e616ae8ebcc4e93d1fb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5a03043ee618c5ae17f915cb13f49d1b2b42cc13")]
 [assembly: System.Reflection.AssemblyProductAttribute("KASHOP.PL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("KASHOP.PL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

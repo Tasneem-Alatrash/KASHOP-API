@@ -1,6 +1,6 @@
 using System;
 
-namespace KASHOP.DAL.DTO;
+namespace KASHOP.DAL.DTO.Request;
 
 public class RegisterRequest
 {

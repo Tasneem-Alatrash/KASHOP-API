@@ -1,7 +1,7 @@
 using System.Diagnostics.Tracing;
 using KASHOP.BLL.Service;
-using KASHOP.DAL.DTO;
-using Microsoft.AspNetCore.Http;
+using KASHOP.DAL.DTO.Request;
+using KASHOP.DAL.DTO.Response;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KASHOP.PL.Areas.Identity
@@ -43,7 +43,28 @@ namespace KASHOP.PL.Areas.Identity
         
             return Ok(result);  
         }
-   
+
+       [HttpPost("SendCode")]
+        public async Task<IActionResult> RequestPasswordReset(ForgetPasswordRequest request)
+        {
+            var result = await _authenticationService.RequestPasswordReset(request);
+            if(!result.Success)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+    
+        [HttpPatch("ResetPassword")]
+        public async Task<IActionResult> ResetPassword(ResetPasswordRequest request)
+        {
+            var result = await _authenticationService.ResetPassword(request);
+            if(!result.Success)
+            { 
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
     
     }
 }
