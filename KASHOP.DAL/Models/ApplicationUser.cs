@@ -12,4 +12,5 @@ public class ApplicationUser : IdentityUser
     public string? CodeResetPassword {get; set;}
     public DateTime? PasswordResetCodeExpiry {get; set;}
 
+    
 }

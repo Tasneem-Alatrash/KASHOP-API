@@ -19,7 +19,7 @@ public class AuthenticationService : IAuthenticationService
     private readonly IConfiguration _configuration;
     private readonly IEmailSender _emailSender;
     private readonly SignInManager<ApplicationUser> _signInManager;
-    public AuthenticationService(UserManager<ApplicationUser> userManager , IConfiguration configuration , IEmailSender emailSender
+    public AuthenticationService(UserManager<ApplicationUser> userManager, IConfiguration configuration, IEmailSender emailSender
     , SignInManager<ApplicationUser> signInManager)
     {
         _userManager = userManager;
@@ -29,44 +29,45 @@ public class AuthenticationService : IAuthenticationService
     }
     public async Task<LoginResponse> LoginAsync(LoginRequest loginRequest)
     {
-         try
+        try
         {
             var user = await _userManager.FindByEmailAsync(loginRequest.Email);
-            if(user is null)
+            if (user is null)
             {
                 return new LoginResponse
                 {
                     Success = false,
                     Message = "invalid Email.",
-                    
+
                 };
             }
-            if(await _userManager.IsLockedOutAsync(user))
+            if (await _userManager.IsLockedOutAsync(user))
             {
                 return new LoginResponse
                 {
                     Success = false,
                     Message = "Your account is locked. Please try again later.",
-                    
+
                 };
             }
 
-            var result = await _signInManager.CheckPasswordSignInAsync(user ,loginRequest.Password , true);
-            if(result.IsLockedOut)
+            var result = await _signInManager.CheckPasswordSignInAsync(user, loginRequest.Password, true);
+            if (result.IsLockedOut)
             {
                 return new LoginResponse
                 {
                     Success = false,
                     Message = "Your account is locked due to multiple failed login attempts. Please try again later.",
-                    
+
                 };
-            }else if (result.IsNotAllowed)
+            }
+            else if (result.IsNotAllowed)
             {
                 return new LoginResponse
                 {
                     Success = false,
                     Message = "Email not confirmed. Please confirm your email before logging in.",
-                    
+
                 };
             }
             if (!result.Succeeded)
@@ -75,15 +76,15 @@ public class AuthenticationService : IAuthenticationService
                 {
                     Success = false,
                     Message = "invalid Password.",
-                    
+
                 };
             }
-          
+
             return new LoginResponse
             {
                 Success = true,
                 Message = "succes ",
-                 AccessToken = await GenerateAccessToken(user)
+                AccessToken = await GenerateAccessToken(user)
             };
         }
         catch (Exception ex)
@@ -117,7 +118,7 @@ public class AuthenticationService : IAuthenticationService
             token = Uri.EscapeDataString(token);
             var EmailURL = $"http://localhost:5296/api/auth/Account/ConfirmEmail?token={token}&userId={user.Id}";
             await _userManager.AddToRoleAsync(user, "User");
-            await _emailSender.SendEmailAsync(user.Email, "Welcome to KASHOP", $"<h1>Thank {user.UserName} for registering at KASHOP!</h1> <a href='{EmailURL}'>Confirm email</a>");    
+            await _emailSender.SendEmailAsync(user.Email, "Welcome to KASHOP", $"<h1>Thank {user.UserName} for registering at KASHOP!</h1> <a href='{EmailURL}'>Confirm email</a>");
             return new RegisterResponse
             {
                 Success = true,
@@ -136,31 +137,33 @@ public class AuthenticationService : IAuthenticationService
 
     }
 
-    public async Task<bool> ConfirmEmailAsync(string token , string userId)
+    public async Task<bool> ConfirmEmailAsync(string token, string userId)
     {
         var user = await _userManager.FindByIdAsync(userId);
-        if(user is null)
-        return false;
-        var result = await _userManager.ConfirmEmailAsync(user , token);
-        if(!result.Succeeded)
+        if (user is null)
+            return false;
+        var result = await _userManager.ConfirmEmailAsync(user, token);
+        if (!result.Succeeded)
             return false;
 
         return true;
     }
     private async Task<string> GenerateAccessToken(ApplicationUser user)
     {
+        var roles = await _userManager.GetRolesAsync(user);
         var userClaims = new List<Claim>()
         {
             new Claim(ClaimTypes.NameIdentifier, user.Id),
             new Claim(ClaimTypes.Email, user.Email),
-            new Claim(ClaimTypes.Name, user.UserName)
+            new Claim(ClaimTypes.Name, user.UserName),
+            new Claim(ClaimTypes.Role, string.Join(',',roles))
         };
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:SecurityKey"]));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
         var token = new JwtSecurityToken(
             issuer: _configuration["JWT:Issuer"],
-            audience:  _configuration["JWT:Audience"],
+            audience: _configuration["JWT:Audience"],
             claims: userClaims,
             expires: DateTime.UtcNow.AddMinutes(30),
             signingCredentials: creds);
@@ -171,7 +174,7 @@ public class AuthenticationService : IAuthenticationService
     public async Task<ForgetPasswordResponse> RequestPasswordReset(ForgetPasswordRequest request)
     {
         var user = await _userManager.FindByEmailAsync(request.Email);
-        if(user is null)
+        if (user is null)
         {
             return new ForgetPasswordResponse
             {
@@ -181,7 +184,7 @@ public class AuthenticationService : IAuthenticationService
         }
 
         var random = new Random();
-        var code = random.Next(1000,9999).ToString();
+        var code = random.Next(1000, 9999).ToString();
         user.CodeResetPassword = code;
         user.PasswordResetCodeExpiry = DateTime.UtcNow.AddMinutes(15);
         await _userManager.UpdateAsync(user);
@@ -192,11 +195,11 @@ public class AuthenticationService : IAuthenticationService
             Message = "code sent to your email."
         };
     }
-    
-     public async Task<ResetPasswordResponse> ResetPassword(ResetPasswordRequest request)
+
+    public async Task<ResetPasswordResponse> ResetPassword(ResetPasswordRequest request)
     {
         var user = await _userManager.FindByEmailAsync(request.Email);
-        if(user is null)
+        if (user is null)
         {
             return new ResetPasswordResponse
             {
@@ -204,27 +207,31 @@ public class AuthenticationService : IAuthenticationService
                 Message = "Email not found."
             };
         }
-        if(request.Code != user.CodeResetPassword){
-             return new ResetPasswordResponse
+        if (request.Code != user.CodeResetPassword)
+        {
+            return new ResetPasswordResponse
             {
                 Success = false,
-                Message =" Invalid code."
+                Message = " Invalid code."
             };
-        }else if(user.PasswordResetCodeExpiry < DateTime.UtcNow){
-             return new ResetPasswordResponse
+        }
+        else if (user.PasswordResetCodeExpiry < DateTime.UtcNow)
+        {
+            return new ResetPasswordResponse
             {
                 Success = false,
-                Message =" Code expired."
+                Message = " Code expired."
             };
         }
 
         var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-        var result = await _userManager.ResetPasswordAsync(user ,token , request.NewPassword);
-        if(!result.Succeeded){
-             return new ResetPasswordResponse
+        var result = await _userManager.ResetPasswordAsync(user, token, request.NewPassword);
+        if (!result.Succeeded)
+        {
+            return new ResetPasswordResponse
             {
                 Success = false,
-                Message =" Password reset failed.",
+                Message = " Password reset failed.",
                 Errors = result.Errors.Select(e => e.Description).ToList()
             };
         }

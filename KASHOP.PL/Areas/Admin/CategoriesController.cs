@@ -9,7 +9,7 @@ namespace KASHOP.PL.Areas.Admin
 {
     [Route("api/admin/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize(Roles ="Admin")]
     public class CategoriesController : ControllerBase
     {
          private readonly ICategoryService _categoryService;
@@ -21,15 +21,58 @@ namespace KASHOP.PL.Areas.Admin
         }
 
          [HttpPost("")]
-        public IActionResult Create(CategoryRequest Request)
+        public async Task<IActionResult> Create(CategoryRequest Request)
         {
-            var response = _categoryService.Create(Request);
+            var response =await _categoryService.CreateAsync(Request);
             return Ok(new
             {
                 Message = _localizer["Success"].Value
             });
         }
     
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCategory([FromRoute] int id)
+        {
+            var response = await _categoryService.DeleteCategoryAsync(id);
+            if (!response.Success)
+            {
+                if(response.Message.Contains("Not Found"))
+                {
+                    return NotFound(response);
+                }
+                return BadRequest(response);
+            }
+            return Ok(response);
+        }
         
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> Update([FromRoute] int id , [FromBody] CategoryRequest category)
+        {
+            var response = await _categoryService.UpdateCategory(id,category);
+            if (!response.Success)
+            {
+                if(response.Message.Contains("Not Found"))
+                {
+                    return NotFound(response);
+                }
+                return BadRequest(response);
+            }
+            return Ok(response);
+        }
+    
+        [HttpPatch("toggle-status/{id}")]
+        public async Task<IActionResult> ToggleStatus([FromRoute] int id)
+        {
+            var response = await _categoryService.ToggleStatus(id);
+            if (!response.Success)
+            {
+                if(response.Message.Contains("Not Found"))
+                {
+                    return NotFound(response);
+                }
+                return BadRequest(response);
+            }
+            return Ok(response);
+        }
     }
 }

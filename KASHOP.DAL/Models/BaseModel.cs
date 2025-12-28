@@ -9,6 +9,11 @@ namespace KASHOP.DAL.Models
     {
         public int Id{get; set;}
         public Status status{get; set;} = Status.Active;
-        public DateTime CreatedAt{get; set;} = DateTime.UtcNow;
+
+        public String CreatedBy{get; set;} 
+        public DateTime CreatedAt{get; set;}
+          public String? UpdatedBy{get; set;} 
+        public DateTime? UpdatedAt{get; set;}
+
     }
 }
