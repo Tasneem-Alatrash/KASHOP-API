@@ -24,9 +24,13 @@ namespace KASHOP.BLL.Service
             return category.Adapt<CategoryResponse>();
         }
 
-        public async Task<List<CategoryResponse>> GetAll()
+        public async Task<List<CategoryResponse>> GetAll(string lang="en")
         {
             var Categories = await _categoryRepository.GetAll();
+            foreach(var category in Categories)
+            {
+                category.Trinslations = category.Trinslations.Where(t=>t.Language == lang).ToList();
+            }
             return Categories.Adapt<List<CategoryResponse>>();
         }
         public async Task<BaseResponse> DeleteCategoryAsync(int id)

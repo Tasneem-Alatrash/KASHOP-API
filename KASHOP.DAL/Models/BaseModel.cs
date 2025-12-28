@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,6 +15,9 @@ namespace KASHOP.DAL.Models
         public DateTime CreatedAt{get; set;}
           public String? UpdatedBy{get; set;} 
         public DateTime? UpdatedAt{get; set;}
+
+        [ForeignKey("CreatedBy")]
+        public ApplicationUser Users {get; set;}
 
     }
 }

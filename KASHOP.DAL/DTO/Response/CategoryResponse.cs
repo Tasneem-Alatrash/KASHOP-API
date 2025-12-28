@@ -10,6 +10,9 @@ namespace KASHOP.DAL.DTO.Response
     {
         public int Id {get;set;}
         public Status status {get;set;}
-        public List<CategoryTranslationResponse> Trinslations {get;set;}
+        public string CreatedBy {get; set;}
+
+         public List<CategoryTranslationResponse> Trinslations {get;set;}
+       
     }
 }

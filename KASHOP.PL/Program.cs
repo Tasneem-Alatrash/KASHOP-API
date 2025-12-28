@@ -16,6 +16,7 @@ using KASHOP.DAL.Utils;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using KASHOP.BLL.MapsterConfigurations;
 
 
 
@@ -127,7 +128,7 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
-      
+        MapsterConfig.MapsterConfigRegister();
         AppConfiguration.Config(builder.Services);
 
         var app = builder.Build();

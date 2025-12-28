@@ -33,6 +33,26 @@ namespace KASHOP.DAL
       builder.Entity<IdentityUserToken<string>>().ToTable("UserTokens");
     }
 
+    public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
+    {
+      var entries = ChangeTracker.Entries<BaseModel>();
+      var CurrentserId = _iHTTPContextAccessorz.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+      foreach (var entityEntry in entries)
+      {
+        if (entityEntry.State == EntityState.Added)
+        {
+          entityEntry.Property(x => x.CreatedBy).CurrentValue = CurrentserId;
+          entityEntry.Property(x => x.CreatedAt).CurrentValue = DateTime.UtcNow;
+        }
+        else if (entityEntry.State == EntityState.Modified)
+        {
+          entityEntry.Property(x => x.UpdatedBy).CurrentValue = CurrentserId;
+          entityEntry.Property(x => x.UpdatedAt).CurrentValue = DateTime.UtcNow;
+        }
+      }
+      return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+    }
     public override int SaveChanges()
     {
       var entries = ChangeTracker.Entries<BaseModel>();
@@ -40,14 +60,14 @@ namespace KASHOP.DAL
 
       foreach (var entityEntry in entries)
       {
-        if(entityEntry.State == EntityState.Added)
+        if (entityEntry.State == EntityState.Added)
         {
           entityEntry.Property(x => x.CreatedBy).CurrentValue = CurrentserId;
           entityEntry.Property(x => x.CreatedAt).CurrentValue = DateTime.UtcNow;
         }
-        else if(entityEntry.State == EntityState.Modified)
+        else if (entityEntry.State == EntityState.Modified)
         {
-            entityEntry.Property(x => x.UpdatedBy).CurrentValue = CurrentserId;
+          entityEntry.Property(x => x.UpdatedBy).CurrentValue = CurrentserId;
           entityEntry.Property(x => x.UpdatedAt).CurrentValue = DateTime.UtcNow;
         }
       }

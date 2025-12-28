@@ -20,6 +20,16 @@ namespace KASHOP.PL.Areas.Admin
             _localizer = localizer;
         }
 
+[HttpGet("")]
+        public async Task<IActionResult> Index()
+        {
+            var response = await _categoryService.GetAll();
+            return Ok(new
+            {
+                Message = _localizer["Success"].Value,
+                response
+            });
+        }
          [HttpPost("")]
         public async Task<IActionResult> Create(CategoryRequest Request)
         {
@@ -74,5 +84,6 @@ namespace KASHOP.PL.Areas.Admin
             }
             return Ok(response);
         }
+        
     }
 }
