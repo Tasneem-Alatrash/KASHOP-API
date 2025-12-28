@@ -23,7 +23,7 @@ namespace KASHOP.PL.Areas.Admin
 [HttpGet("")]
         public async Task<IActionResult> Index()
         {
-            var response = await _categoryService.GetAll();
+            var response = await _categoryService.getAllCategoriesForAdimn();
             return Ok(new
             {
                 Message = _localizer["Success"].Value,

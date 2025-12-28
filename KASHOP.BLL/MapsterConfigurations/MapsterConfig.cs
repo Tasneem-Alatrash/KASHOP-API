@@ -11,5 +11,8 @@ public static class MapsterConfig
     {
         TypeAdapterConfig<Category , CategoryResponse>.NewConfig().
         Map(dest => dest.CreatedBy , source => source.Users.UserName);
+
+        TypeAdapterConfig<Category , CategoryUserResponse>.NewConfig().
+        Map(dest => dest.Name , source => source.Trinslations.Where(t=>t.Language == MapContext.Current.Parameters["lang"]).Select(t=>t.Name).FirstOrDefault());
     }
 }

@@ -24,13 +24,9 @@ namespace KASHOP.BLL.Service
             return category.Adapt<CategoryResponse>();
         }
 
-        public async Task<List<CategoryResponse>> GetAll(string lang="en")
+        public async Task<List<CategoryResponse>> getAllCategoriesForAdimn()
         {
             var Categories = await _categoryRepository.GetAll();
-            foreach(var category in Categories)
-            {
-                category.Trinslations = category.Trinslations.Where(t=>t.Language == lang).ToList();
-            }
             return Categories.Adapt<List<CategoryResponse>>();
         }
         public async Task<BaseResponse> DeleteCategoryAsync(int id)
@@ -155,6 +151,20 @@ namespace KASHOP.BLL.Service
                     Errors = new List<string> { ex.Message }
                 };
             }
+        }
+
+        public async Task<List<CategoryUserResponse>> getAllCategoriesForUser(string lang="en")
+        {
+            
+            var categories = await _categoryRepository.GetAll();
+            foreach(var category in categories)
+            {
+                category.Trinslations = category.Trinslations.Where(t => t.Language == lang).ToList();
+
+            }
+            var response = categories.BuildAdapter().AddParameters("lang" , lang).AdaptToType<List<CategoryUserResponse>>();
+            return response;
+           
         }
     }
 }
