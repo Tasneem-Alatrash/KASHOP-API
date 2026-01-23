@@ -17,7 +17,8 @@ namespace KASHOP.DAL.Models
         public DateTime? UpdatedAt{get; set;}
 
         [ForeignKey("CreatedBy")]
-        public ApplicationUser Users {get; set;}
+        public ApplicationUser User {get; set;}
+        
 
     }
 }

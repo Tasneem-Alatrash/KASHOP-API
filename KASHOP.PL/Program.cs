@@ -1,24 +1,16 @@
 
-using System;
-using KASHOP.BLL;
 using KASHOP.DAL;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
-using KASHOP.DAL.Repository;
-using KASHOP.BLL.Service;
 using KASHOP.DAL.Models;
 using Microsoft.AspNetCore.Identity;
 using KASHOP.DAL.Utils;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using KASHOP.BLL.MapsterConfigurations;
-
-
 
 
 namespace KASHOP.PL;
@@ -30,7 +22,7 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
-
+       
 
         builder.Services.AddControllers();
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -128,8 +120,9 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
-        MapsterConfig.MapsterConfigRegister();
+        
         AppConfiguration.Config(builder.Services);
+        MapsterConfig.MapsterConfigRegister();
 
         var app = builder.Build();
         app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);

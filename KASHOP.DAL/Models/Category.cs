@@ -9,5 +9,6 @@ namespace KASHOP.DAL.Models
     {
         
         public List<CategoryTrinslation> Trinslations{get; set;}
+        public List<Product> Products{get; set;}
     }
 }

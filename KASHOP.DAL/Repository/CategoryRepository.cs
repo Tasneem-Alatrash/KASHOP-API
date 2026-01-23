@@ -24,7 +24,7 @@ namespace KASHOP.DAL.Repository
 
         public async Task<List<Category>> GetAll()
         {
-            return await _context.Categories.Include(c => c.Trinslations).ToListAsync();
+            return await _context.Categories.Include(c => c.Trinslations).Include(c=>c.User).ToListAsync();
         }
         public async Task<Category?> FindByIdAsync(int id)
         {
