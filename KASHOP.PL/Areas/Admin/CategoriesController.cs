@@ -20,7 +20,7 @@ namespace KASHOP.PL.Areas.Admin
             _localizer = localizer;
         }
 
-[HttpGet("")]
+        [HttpGet("")]
         public async Task<IActionResult> Index()
         {
             var response = await _categoryService.getAllCategoriesForAdimn();

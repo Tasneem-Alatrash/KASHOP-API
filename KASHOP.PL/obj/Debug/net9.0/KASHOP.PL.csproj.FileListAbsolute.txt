@@ -1,5 +1,4 @@
 /Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.PL/bin/Debug/net9.0/appsettings.Development.json
-/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.PL/bin/Debug/net9.0/appsettings.json
 /Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.PL/bin/Debug/net9.0/KASHOP.PL.staticwebassets.endpoints.json
 /Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.PL/bin/Debug/net9.0/KASHOP.PL
 /Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.PL/bin/Debug/net9.0/KASHOP.PL.deps.json
@@ -182,3 +181,5 @@
 /Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.PL/bin/Debug/net9.0/Microsoft.Extensions.Options.dll
 /Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.PL/bin/Debug/net9.0/Microsoft.Extensions.Primitives.dll
 /Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.PL/bin/Debug/net9.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.PL/bin/Debug/net9.0/appsettings.json
+/Users/tasneemalatrash/Desktop/asp/API/KASHOP/KASHOP.PL/bin/Debug/net9.0/KASHOP.PL.staticwebassets.runtime.json

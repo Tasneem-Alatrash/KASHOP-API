@@ -75,35 +75,6 @@ public class Program
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SecurityKey"]))
         };
     });
-        builder.Services.AddSwaggerGen(c =>
-    {
-        c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "KASHOP API", Version = "v1" });
-
-        c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
-        {
-            Name = "Authorization",
-            Type = Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey,
-            Scheme = "Bearer",
-            BearerFormat = "JWT",
-            In = Microsoft.OpenApi.Models.ParameterLocation.Header,
-            Description = "Enter: Bearer {your token}"
-        });
-
-        c.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
-        {
-        {
-            new Microsoft.OpenApi.Models.OpenApiSecurityScheme
-            {
-                Reference = new Microsoft.OpenApi.Models.OpenApiReference
-                {
-                    Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                }
-            },
-            new string[] {}
-        }
-        });
-    });
         builder.Services.Configure<RequestLocalizationOptions>(options =>
         {
             options.DefaultRequestCulture = new RequestCulture(defaultCulture);
@@ -144,7 +115,7 @@ public class Program
             }
 
         }
-
+        app.UseStaticFiles();
         app.UseHttpsRedirection();
 
         app.UseAuthorization();

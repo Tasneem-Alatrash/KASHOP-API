@@ -17,6 +17,9 @@ public static class MapsterConfig
         Map(dest => dest.Name , source => source.Trinslations.
         Where(t=>t.Language == MapContext.Current.Parameters["lang"].ToString()).
         Select(t=>t.Name).FirstOrDefault());
+
+        TypeAdapterConfig<Product , ProductResponse>.NewConfig().
+        Map(dest => dest.MainImage , source => $"http://localhost:5296/images/{source.MainImage}");
       
     }
 }

@@ -6,7 +6,7 @@ namespace KASHOP.DAL.DTO.Request;
 
 public class ProductRequest
 {
-    public List<ProductTranslationRequest> Translations{get;set;}
+    public List<ProductTranslationRequest> Translation{get;set;}
     public decimal Price{get;set;}
     public decimal Discount{get;set;}
     public int Quantity{get;set;}

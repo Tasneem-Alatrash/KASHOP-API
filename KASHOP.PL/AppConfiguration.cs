@@ -16,5 +16,8 @@ public static class AppConfiguration
         Services.AddScoped<ISeedData, UserSeedData>();
         Services.AddScoped<IAuthenticationService, AuthenticationService>();
         Services.AddTransient<IEmailSender, EmailSender>();
+        Services.AddScoped<IProductRepository, ProductRepository>();
+        Services.AddScoped<IProductService, ProductSerivce>();
+        Services.AddScoped<IFileService, FileService>();
     }
 }
